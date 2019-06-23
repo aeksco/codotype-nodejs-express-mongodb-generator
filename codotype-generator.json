@@ -11,13 +11,30 @@
   "version": "0.1.0",
   "official": true,
   "experience": "Intermediate",
-  "option_groups": [
+  "defaultSchemas": [],
+  "defaultConfiguration": {},
+  "supportedDatatypes": [
+    "STRING",
+    "TEXT",
+    "INTEGER",
+    "BOOLEAN",
+    "TIME",
+    "DATE",
+    "DATETIME"
+  ],
+  "supportedRelations": [
+    "BELONGS_TO",
+    "HAS_ONE",
+    "HAS_MANY"
+  ],
+  "configuration_groups": [
     {
       "id": "DEPLOYMENT_OPTION_GROUP",
       "label": "Deployment",
       "identifier": "deployment",
       "description": "Configure the deployment options for your app",
-      "type": "OPTION_GROUP_TYPE_GLOBAL_OPTION",
+      "type": "CONFIGURATION_GROUP_TYPE_OPTION",
+      "scope": "CONFIGURATION_GROUP_SCOPE_GLOBAL",
       "more_info_url": null,
       "attributes": [
         {
@@ -39,7 +56,8 @@
       "label": "Documentation",
       "identifier": "documentation",
       "description": "Configure the documentation options for your code",
-      "type": "OPTION_GROUP_TYPE_GLOBAL_OPTION",
+      "type": "CONFIGURATION_GROUP_TYPE_OPTION",
+      "scope": "CONFIGURATION_GROUP_SCOPE_GLOBAL",
       "more_info_url": null,
       "attributes": [
         {
@@ -65,7 +83,8 @@
       "class_name": "ApiAction",
       "class_name_plural": "ApiActions",
       "description": "Add individual RESTful API actions to your models",
-      "type": "OPTION_GROUP_TYPE_MODEL_ADDON",
+      "type": "CONFIGURATION_GROUP_TYPE_ADDON",
+      "scope": "CONFIGURATION_GROUP_SCOPE_SCHEMA",
       "previewTemplate": "<small><pre class='bg-dark text-light mb-0' v-if='model.scope === \"COLLECTION\"'>{{model.verb}} /{{ schema.identifier_plural }}/{{model.uri}} - {{ model.function_name }}()</pre><pre class='bg-dark text-light mb-0' v-else>{{model.verb}} /{{ schema.identifier_plural }}/:{{ schema.identifier }}_id/{{model.uri}} - {{ model.function_name }}()</pre></small>",
       "more_info_url": null,
       "attributes": [
