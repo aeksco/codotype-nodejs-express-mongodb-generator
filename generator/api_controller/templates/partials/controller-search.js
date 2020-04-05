@@ -22,7 +22,7 @@ module.exports.search = async (req, res) => {
   // }
 
   // TODO - this feels sloppy....
-  <%_ if (schema.attributes.filter(attr => [DATATYPE_STRING, DATATYPE_TEXT].includes(attr.datatype)).length) { _%>
+  <%_ if (schema.attributes.filter(attr => [Datatype.STRING, Datatype.TEXT].includes(attr.datatype)).length) { _%>
 
   let textSearch = req.query.search || ''
 
@@ -54,7 +54,7 @@ module.exports.search = async (req, res) => {
 
   const <%= schema.identifier_plural %> = <%= schema.class_name %>.find(query)
   <%_ schema.relations.forEach((rel) => { _%>
-  <%_ if ([RELATION_TYPE_BELONGS_TO, RELATION_TYPE_HAS_ONE].includes(rel.type)) { _%>
+  <%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
   .populate({ path: '<%= rel.alias.identifier %>', select: '<%= rel.related_lead_attribute %>' })
   <%_ } _%>
   <%_ }) _%>

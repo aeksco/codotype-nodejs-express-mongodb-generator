@@ -1,6 +1,6 @@
 <%_ /* MONGOOSE VIRTUALS */ _%>
 <%_ schema.relations.forEach((rel) => { _%>
-<%_ if ([RELATION_TYPE_BELONGS_TO, RELATION_TYPE_HAS_ONE].includes(rel.type)) { _%>
+<%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
 // Specifying a virtual with a `ref` property is how you enable virtual population
 <%= schema.class_name %>Model.virtual('<%= rel.alias.identifier %>', {
   ref: '<%= rel.schema.class_name %>',
@@ -23,14 +23,14 @@
 
 <%_ /* MONGOOSE METHODS */ _%>
 <%_ schema.relations.forEach((rel) => { _%>
-<%_ if ([RELATION_TYPE_BELONGS_TO, RELATION_TYPE_HAS_ONE].includes(rel.type)) { _%>
+<%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
 // Same as above just as a method
 <%= schema.class_name %>Model.methods.get<%= rel.alias.class_name %> = function () {
   return mongoose.model('<%= rel.schema.class_name %>').findById(this.<%= rel.alias.identifier + '_id' %>);
 }
 
 <%_ /* TODO - HAS_MANY doesn't work like this */ _%>
-<%_ } else if (rel.type === RELATION_TYPE_HAS_MANY) { _%>
+<%_ } else if (rel.type === RelationType.HAS_MANY) { _%>
 <%= schema.class_name %>Model.methods.get<%= rel.alias.class_name_plural %> = function () {
   return mongoose.model('<%= rel.schema.class_name %>').find({ _id: this.<%= rel.alias.identifier + '_ids' %> });
 }
@@ -38,6 +38,6 @@
 <%_ }) _%>
 
 <%_ /* MONGOOSE TOJSON SETS */ _%>
-<%_ if (schema.relations.map(r => r.type).includes(RELATION_TYPE_BELONGS_TO)) { _%>
+<%_ if (schema.relations.map(r => r.type).includes(RelationType.BELONGS_TO)) { _%>
 <%= schema.class_name %>Model.set('toJSON', { getters: true, virtuals: true });
 <%_ } _%>

@@ -1,5 +1,5 @@
 <%_ schema.reverse_relations.forEach((rel) => { _%>
-<%_ if (rel.type === RELATION_TYPE_BELONGS_TO) { _%>
+<%_ if (rel.type === RelationType.BELONGS_TO) { _%>
 <%_ if (generate_api_doc) { _%>
 /**
 * @api {GET} /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier_plural %> show<%= rel.alias.class_name_plural %>
@@ -17,7 +17,7 @@ module.exports.show<%= rel.alias.class_name_plural %> = (req, res, next) => {
     .find({ <%= rel.reverse_alias.identifier %>_id: req.params.id })
     <%_ let relatedSchema = blueprint.schemas.find(s => s.id === rel.related_schema_id) _%>
     <%_ relatedSchema.relations.forEach((rel) => { _%>
-    <%_ if ([RELATION_TYPE_BELONGS_TO, RELATION_TYPE_HAS_ONE].includes(rel.type)) { _%>
+    <%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
     .populate({ path: '<%= rel.alias.identifier %>', select: '<%= rel.related_lead_attribute %>' })
     <%_ } _%>
     <%_ }) _%>

@@ -1,5 +1,5 @@
 <%_ schema.relations.forEach((rel) => { _%>
-<%_ if ([RELATION_TYPE_BELONGS_TO, RELATION_TYPE_HAS_ONE].includes(rel.type)) { _%>
+<%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
 describe('GET /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier %>', () => {
 
   // Stores <%= schema.identifier %>_instance in outer scope
@@ -28,7 +28,7 @@ describe('GET /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier 
 });
 
 // // // //
-<% } else if ([RELATION_TYPE_HAS_MANY, 'REF_BELONGS_TO'].includes(rel.type)) { %>
+<% } else if ([RelationType.HAS_MANY, 'REF_BELONGS_TO'].includes(rel.type)) { %>
 // GET /api/<%= schema.identifier_plural %>/:id/<%= rel.schema.identifier_plural %> show<%= rel.schema.class_name_plural %>
 
 describe('GET /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier_plural %>', () => {
