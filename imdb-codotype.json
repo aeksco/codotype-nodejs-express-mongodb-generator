@@ -1,6 +1,8 @@
 {
   "label": "Imdb",
   "identifier": "imdb",
+  "generatorId": "codotype-nodejs-express-mongodb-generator",
+  "generatorVersion": "0.1.0",
   "schemas": [
     {
       "id": "USER_SCHEMA_ID",
@@ -165,5 +167,6 @@
         }
       ]
     }
-  ]
+  ],
+  "configuration": {}
 }
