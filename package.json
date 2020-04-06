@@ -4,12 +4,29 @@
   "description": "A Codotype generator for Node.js, Express, MongoDB &amp; Docker",
   "main": "index.js",
   "scripts": {
-    "serve": "codotype generator-serve"
+    "test": "jest",
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
   },
   "author": "Alexander Schwartzberg",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/codotype/codotype-nodejs-express-mongodb-generator/issues"
   },
-  "homepage": "https://github.com/codotype/codotype-nodejs-express-mongodb-generator#readme"
+  "homepage": "https://github.com/codotype/codotype-nodejs-express-mongodb-generator#readme",
+  "dependencies": {
+    "@codotype/types": "^1.0.0",
+    "@codotype/generator": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "chai": "^4.1.2",
+    "jest": "^24.9.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.8.3"
+  }
 }
