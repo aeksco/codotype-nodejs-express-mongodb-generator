@@ -3,7 +3,7 @@
     "declaration": true,
     "module": "commonjs",
     "target": "es6",
-    "outDir": "generator",
+    "outDir": "generator-new",
     "sourceMap": true
   },
   "lib": ["es2018", "dom", "es6"],
