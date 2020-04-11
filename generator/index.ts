@@ -1,4 +1,5 @@
 // TODO - rename constructor options
+// Something like GeneratorModule? GeneratorFragment? GeneratorComponent?
 import { ConstructorOptions } from "@codotype/generator";
 
 // Defines typed generator constant
