@@ -1,15 +1,15 @@
 <%_ if (generate_api_doc) { _%>
 /**
-* @api {get} /api/<%= schema.identifier_plural %>/search Search
+* @api {get} /api/<%= schema.identifiers.plural.snake %>/search Search
 * @apiName search
-* @apiGroup <%= schema.class_name %> Controller
-* @apiDescription Gets a list of <%= schema.label_plural %> that match a search query
+* @apiGroup <%= schema.identifiers.singular.pascal %> Controller
+* @apiDescription Gets a list of <%= schema.identifiers.plural.pascal %> that match a search query
 * @apiPermission authenticated
-* @apiSuccess {Collection} root Collection of <%= schema.label %> records
-* @apiError (500) UnknownException Could not retrieve <%= schema.label %> collection
+* @apiSuccess {Collection} root Collection of <%= schema.identifiers.singular.label %> records
+* @apiError (500) UnknownException Could not retrieve <%= schema.identifiers.singular.label %> collection
 */
 <%_ } else { _%>
-// GET /api/<%= schema.identifier_plural %>/search Search
+// GET /api/<%= schema.identifiers.plural.snake %>/search Search
 <%_ } _%>
 module.exports.search = async (req, res) => {
 
@@ -50,9 +50,9 @@ module.exports.search = async (req, res) => {
   // NOTE - the `countDocuments` operation is another call to MongoDB
   // This can be potentially expensive, you may want to remove it
   // It's currently included so pagination functions correctly on the front-end
-  const count = await <%= schema.class_name %>.countDocuments(query)
+  const count = await <%= schema.identifiers.singular.pascal %>.countDocuments(query)
 
-  const <%= schema.identifier_plural %> = <%= schema.class_name %>.find(query)
+  const <%= schema.identifiers.plural.snake %> = <%= schema.identifiers.singular.pascal %>.find(query)
   <%_ schema.relations.forEach((rel) => { _%>
   <%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
   .populate({ path: '<%= rel.alias.identifier %>', select: '<%= rel.related_lead_attribute %>' })
@@ -62,14 +62,14 @@ module.exports.search = async (req, res) => {
   .skip(offset)
   .lean()
   .exec()
-  .then((<%= schema.identifier_plural %>) => {
+  .then((<%= schema.identifiers.plural.snake %>) => {
 
     return res
     .status(200)
     .json({
       page: page,
       per_page: per_page,
-      items: <%= schema.identifier_plural %>,
+      items: <%= schema.identifiers.plural.snake %>,
       count: count
     });
 

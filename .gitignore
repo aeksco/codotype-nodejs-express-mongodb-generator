@@ -12,6 +12,11 @@ selenium-debug.log
 *.pyc
 codotype-build/**/*
 !build/.gitkeep
+generator/*/index.d.ts
+generator/*/index.js.map
+generator/index.d.ts
+generator/index.js.map
+generator/index.js
 
 # Editor directories and files
 .idea

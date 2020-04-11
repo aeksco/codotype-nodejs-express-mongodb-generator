@@ -1,16 +1,16 @@
 const app = require('../../app');
 const request = require('supertest');
-const <%= schema.class_name %> = require('./<%= schema.identifier %>.model')
+const <%= schema.identifiers.singular.pascal %> = require('./<%= schema.identifiers.singular.snake %>.model')
 const { JWT_HEADER } = require('../../../test/utils');
-const { build<%= schema.class_name %> } = require('../../../test/mocks');
+const { build<%= schema.identifiers.singular.pascal %> } = require('../../../test/mocks');
 
-const API_ROOT = '/api/<%= schema.identifier_plural %>'
+const API_ROOT = '/api/<%= schema.identifiers.plural.snake %>'
 
-describe('<%= schema.label %> API', () => {
+describe('<%= schema.identifiers.singular.label %> API', () => {
 
   <%- helpers.indent(include('./partials/spec-list.js'), 2) %>
 
-  <%_ if (schema.identifier !== 'user') { _%>
+  <%_ if (schema.identifiers.singular.snake !== 'user') { _%>
   <%- helpers.indent(include('./partials/spec-create.js'), 2) %>
   <%- helpers.indent(include('./partials/spec-update.js'), 2) %>
   <%_ } _%>

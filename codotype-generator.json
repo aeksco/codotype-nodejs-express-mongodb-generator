@@ -3,7 +3,14 @@
   "label": "Express.js & MongoDB REST API Generator",
   "icon": "https://jaystack.com/wp-content/uploads/2015/12/nodejs-logo-e1497443346889.png",
   "description": "Instantly generate Web APIs with Node.js, Express, MongoDB, and Docker",
-  "tech_tags": ["Node.js", "Express.js", "MongoDB", "Docker", "JavaScript", "ES6"],
+  "tech_tags": [
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "Docker",
+    "JavaScript",
+    "ES6"
+  ],
   "type_tags": ["REST API"],
   "self_configuring": false,
   "project_path": "express_api",
@@ -22,11 +29,7 @@
     "DATE",
     "DATETIME"
   ],
-  "supportedRelations": [
-    "BELONGS_TO",
-    "HAS_ONE",
-    "HAS_MANY"
-  ],
+  "supportedRelations": ["BELONGS_TO", "HAS_ONE", "HAS_MANY"],
   "configuration_groups": [
     {
       "id": "DEPLOYMENT_OPTION_GROUP",
@@ -85,7 +88,7 @@
       "description": "Add individual RESTful API actions to your models",
       "type": "CONFIGURATION_GROUP_TYPE_ADDON",
       "scope": "CONFIGURATION_GROUP_SCOPE_SCHEMA",
-      "previewTemplate": "<small><pre class='bg-dark text-light mb-0' v-if='model.scope === \"COLLECTION\"'>{{model.verb}} /{{ schema.identifier_plural }}/{{model.uri}} - {{ model.function_name }}()</pre><pre class='bg-dark text-light mb-0' v-else>{{model.verb}} /{{ schema.identifier_plural }}/:{{ schema.identifier }}_id/{{model.uri}} - {{ model.function_name }}()</pre></small>",
+      "previewTemplate": "<small><pre class='bg-dark text-light mb-0' v-if='model.scope === \"COLLECTION\"'>{{model.verb}} /{{ schema.identifiers.plural.snake }}/{{model.uri}} - {{ model.function_name }}()</pre><pre class='bg-dark text-light mb-0' v-else>{{model.verb}} /{{ schema.identifiers.plural.snake }}/:{{ schema.identifier }}_id/{{model.uri}} - {{ model.function_name }}()</pre></small>",
       "more_info_url": null,
       "attributes": [
         {

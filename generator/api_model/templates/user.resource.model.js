@@ -52,7 +52,7 @@ const userAttributes = {
 
 <%- include('./partials/resource-collection-options.js') %>
 
-const <%= schema.class_name %>Model = new mongoose.Schema(userAttributes, collection_options);
+const <%= schema.identifiers.singular.pascal %>Model = new mongoose.Schema(userAttributes, collection_options);
 
 // // // //
 
@@ -90,4 +90,4 @@ UserModel.method('assignAdmin', function () {
 
 // // // //
 
-module.exports = mongoose.model('<%= schema.class_name %>', <%= schema.class_name %>Model)
+module.exports = mongoose.model('<%= schema.identifiers.singular.pascal %>', <%= schema.identifiers.singular.pascal %>Model)

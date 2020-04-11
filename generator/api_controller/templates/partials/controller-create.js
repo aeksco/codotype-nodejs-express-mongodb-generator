@@ -1,14 +1,14 @@
 <%_ if (generate_api_doc) { _%>
 /**
-* @api {POST} /api/<%= schema.identifier_plural %> Create
+* @api {POST} /api/<%= schema.identifiers.plural.snake %> Create
 * @APIname Create
-* @APIgroup <%= schema.class_name %> Controller
-* @apidescription Creates a new <%= schema.label %>
-* @apiSuccess {json} The newly created <%= schema.label %>
+* @APIgroup <%= schema.identifiers.singular.pascal %> Controller
+* @apidescription Creates a new <%= schema.identifiers.singular.label %>
+* @apiSuccess {json} The newly created <%= schema.identifiers.singular.label %>
 * @apiError (Error) 500 Internal server error
 */
 <%_ } else { _%>
-// POST /api/<%= schema.identifier_plural %>/:id Create
+// POST /api/<%= schema.identifiers.plural.snake %>/:id Create
 <%_ } _%>
 module.exports.create = async (req, res, next) => {
   <%_ if (schema.identifier !== 'user') { _%>
@@ -16,16 +16,16 @@ module.exports.create = async (req, res, next) => {
   // Pulls values from req.body
   const { <%= objectKeys.join(', ') %> } = req.body
 
-  // Creates new <%= schema.class_name %> instance
-  const newModel = new <%= schema.class_name %>({
+  // Creates new <%= schema.identifiers.singular.pascal %> instance
+  const newModel = new <%= schema.identifiers.singular.pascal %>({
     <%= objectKeys.join(',\n      ') %>
   })
 
-  // Saves new <%= schema.class_name %> instance
+  // Saves new <%= schema.identifiers.singular.pascal %> instance
   newModel.save()
   .then((resp) => {
 
-    // Sends new <%= schema.class_name %> to client
+    // Sends new <%= schema.identifiers.singular.pascal %> to client
     return res
     .status(200)
     .send(resp)

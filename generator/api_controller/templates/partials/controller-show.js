@@ -1,17 +1,17 @@
 <%_ if (generate_api_doc) { _%>
 /**
-* @api {GET} /api/<%= schema.identifier_plural %>/:id Show
+* @api {GET} /api/<%= schema.identifiers.plural.snake %>/:id Show
 * @APIname Show
-* @APIgroup <%= schema.class_name %> Controller
-* @apidescription Fetch a single <%= schema.label %>
-* @apiSuccess {json} The requested <%= schema.label %>
+* @APIgroup <%= schema.identifiers.singular.pascal %> Controller
+* @apidescription Fetch a single <%= schema.identifiers.singular.label %>
+* @apiSuccess {json} The requested <%= schema.identifiers.singular.label %>
 * @apiError (Error) 500 Internal server error
 */
 <%_ } else { _%>
-// GET /api/<%= schema.identifier_plural %>/:id Show
+// GET /api/<%= schema.identifiers.plural.snake %>/:id Show
 <%_ } _%>
 module.exports.show = (req, res, next) => {
-  <%= schema.class_name %>.findById(req.params.id)
+  <%= schema.identifiers.singular.pascal %>.findById(req.params.id)
   <%_ schema.relations.forEach((rel) => { _%>
   <%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
   .populate({ path: '<%= rel.alias.identifier %>', select: '<%= rel.related_lead_attribute %>' })

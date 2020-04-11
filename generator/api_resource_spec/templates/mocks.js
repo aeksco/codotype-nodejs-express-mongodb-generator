@@ -1,6 +1,6 @@
 
 <%_ blueprint.schemas.forEach((schema) => { _%>
-const build<%= schema.class_name %> = () => {
+const build<%= schema.identifiers.singular.pascal %> = () => {
   return Object.assign({}, {
     <%_ if (schema.identifier === 'user') { _%>
     password: 'RANDOM-PASSWORD-' + Math.random().toString(),
@@ -53,6 +53,6 @@ const build<%= schema.class_name %> = () => {
 
 module.exports = {
   <%_ blueprint.schemas.forEach((schema) => { _%>
-  build<%= schema.class_name %>,
+  build<%= schema.identifiers.singular.pascal %>,
   <%_ }) _%>
 }

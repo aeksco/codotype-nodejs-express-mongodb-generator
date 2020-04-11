@@ -40,12 +40,12 @@
 <%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
 <%= rel.alias.identifier + '_id' %>: {
   type: mongoose.Schema.Types.ObjectId,
-  ref: '<%= rel.schema.class_name %>'
+  ref: '<%= rel.schema.identifiers.singular.pascal %>'
 },
 <%_ } else if (rel.type === RelationType.HAS_MANY) { _%>
 <%= rel.alias.identifier + '_ids' %>: [{
   type: mongoose.Schema.Types.ObjectId,
-  ref: '<%= rel.schema.class_name %>'
+  ref: '<%= rel.schema.identifiers.singular.pascal %>'
 }],
 <%_ } _%>
 <%_ }) _%>

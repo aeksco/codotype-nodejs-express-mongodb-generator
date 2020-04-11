@@ -1,26 +1,26 @@
 <%_ schemaApiActions.forEach((action) => { _%>
 <%_ if (action.scope === 'ROOT' && generate_api_doc) { _%>
 /**
-* @api {<%= action.verb %>} /api/<%= schema.identifier_plural %>/<%= action.uri %> <%= action.label %>
+* @api {<%= action.verb %>} /api/<%= schema.identifiers.plural.snake %>/<%= action.uri %> <%= action.label %>
 * @APIname <%= action.label %>
-* @APIgroup <%= schema.class_name %> Controller
+* @APIgroup <%= schema.identifiers.singular.pascal %> Controller
 * @apidescription Executes the <%= action.label %> API Action
 * @apiSuccess {json} The result of the <%= action.label %> API Action
 * @apiError (Error) 500 Internal server error
 */
 <%_ } else if (action.scope === 'MODEL' && generate_api_doc) { _%>
 /**
-* @api {<%= action.verb %>} /api/<%= schema.identifier_plural %>/:id/<%= action.uri %> :id/<%= action.label %>
+* @api {<%= action.verb %>} /api/<%= schema.identifiers.plural.snake %>/:id/<%= action.uri %> :id/<%= action.label %>
 * @APIname <%= action.label %>
-* @APIgroup <%= schema.class_name %> Controller
+* @APIgroup <%= schema.identifiers.singular.pascal %> Controller
 * @apidescription Executes the <%= action.label %> API Action
 * @apiSuccess {json} The result of the <%= action.label %> API Action
 * @apiError (Error) 500 Internal server error
 */
 <%_ } else if (action.scope === 'ROOT') { _%>
-// <%= action.verb %> /api/<%= schema.identifier_plural %>/<%= action.uri %> <%= action.label %>
+// <%= action.verb %> /api/<%= schema.identifiers.plural.snake %>/<%= action.uri %> <%= action.label %>
 <%_ } else if (action.scope === 'MODEL') { _%>
-// <%= action.verb %> /api/<%= schema.identifier_plural %>/:id/<%= action.uri %> <%= action.label %>
+// <%= action.verb %> /api/<%= schema.identifiers.plural.snake %>/:id/<%= action.uri %> <%= action.label %>
 <%_ } _%>
 <%_ if (action.scope === 'ROOT') { _%>
 module.exports.<%= action.function_name %> = async (req, res, next) => {
@@ -30,7 +30,7 @@ module.exports.<%= action.function_name %> = async (req, res, next) => {
 
   // NOTES - remove
   // .find({ user_id: req.user.id })
-  const items = await <%= schema.class_name %>
+  const items = await <%= schema.identifiers.singular.pascal %>
   .find({})
   <%_ schema.relations.forEach((rel) => { _%>
   <%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
@@ -53,7 +53,7 @@ module.exports.<%= action.function_name %> = async (req, res, next) => {
 
   //   user_id: req.user.id,
   const payload = {  } // TODO - add attributes here that you would like to change
-  const model = await  <%= schema.class_name %>.findByIdAndUpdate(req.params.id, { $set: payload }, { new: true })
+  const model = await  <%= schema.identifiers.singular.pascal %>.findByIdAndUpdate(req.params.id, { $set: payload }, { new: true })
   <%_ schema.relations.forEach((rel) => { _%>
   <%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
   .populate({ path: '<%= rel.alias.identifier %>', select: '<%= rel.related_lead_attribute %>' })

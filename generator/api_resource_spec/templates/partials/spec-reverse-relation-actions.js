@@ -1,18 +1,18 @@
 <%_ schema.reverse_relations.forEach((rel) => { _%>
 <%_ if ([RelationType.HAS_ONE].includes(rel.type)) { _%>
-describe('GET /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier %>', () => {
+describe('GET /api/<%= schema.identifiers.plural.snake %>/:id/<%= rel.alias.identifier %>', () => {
 
   // Stores <%= schema.identifier %>_instance in outer scope
   let <%= schema.identifier %>_instance
 
-  // Creates <%= schema.class_name %> mock record before running tests
+  // Creates <%= schema.identifiers.singular.pascal %> mock record before running tests
   before(() => {
-    <%= schema.identifier %>_instance = new <%= schema.class_name %>(build<%= schema.class_name %>())
+    <%= schema.identifier %>_instance = new <%= schema.identifiers.singular.pascal %>(build<%= schema.identifiers.singular.pascal %>())
     return <%= schema.identifier %>_instance.save()
   });
 
-  // Destroys <%= schema.class_name %> mock record after running tests
-  after(() => { return <%= schema.class_name %>.deleteOne(<%= schema.identifier %>_instance) });
+  // Destroys <%= schema.identifiers.singular.pascal %> mock record after running tests
+  after(() => { return <%= schema.identifiers.singular.pascal %>.deleteOne(<%= schema.identifier %>_instance) });
 
   it('authenticated request should respond with JSON object', (done) => {
     request(app)
@@ -29,21 +29,21 @@ describe('GET /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier 
 
 // // // //
 <% } else if ([RelationType.BELONGS_TO].includes(rel.type)) { %>
-// GET /api/<%= schema.identifier_plural %>/:id/<%= rel.schema.identifier_plural %> show<%= rel.schema.class_name_plural %>
+// GET /api/<%= schema.identifiers.plural.snake %>/:id/<%= rel.schema.identifiers.plural.snake %> show<%= rel.schema.class_name_plural %>
 
-describe('GET /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier_plural %>', () => {
+describe('GET /api/<%= schema.identifiers.plural.snake %>/:id/<%= rel.alias.identifier_plural %>', () => {
 
   // Stores <%= schema.identifier %>_instance in outer scope
   let <%= schema.identifier %>_instance
 
-  // Creates <%= schema.class_name %> mock record before running tests
+  // Creates <%= schema.identifiers.singular.pascal %> mock record before running tests
   before(() => {
-    <%= schema.identifier %>_instance = new <%= schema.class_name %>(build<%= schema.class_name %>())
+    <%= schema.identifier %>_instance = new <%= schema.identifiers.singular.pascal %>(build<%= schema.identifiers.singular.pascal %>())
     return <%= schema.identifier %>_instance.save()
   });
 
-  // Destroys <%= schema.class_name %> mock record after running tests
-  after(() => { return <%= schema.class_name %>.deleteOne(<%= schema.identifier %>_instance) });
+  // Destroys <%= schema.identifiers.singular.pascal %> mock record after running tests
+  after(() => { return <%= schema.identifiers.singular.pascal %>.deleteOne(<%= schema.identifier %>_instance) });
 
   it('authenticated request should respond with JSON object', (done) => {
     request(app)

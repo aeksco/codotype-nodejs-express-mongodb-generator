@@ -2,21 +2,21 @@
 <%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
 <%_ if (generate_api_doc) { _%>
 /**
-* @api {GET} /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier %> show<%= rel.alias.class_name %>
+* @api {GET} /api/<%= schema.identifiers.plural.snake %>/:id/<%= rel.alias.identifier %> show<%= rel.alias.class_name %>
 * @APIname show<%= rel.alias.class_name %>
-* @APIgroup <%= schema.class_name %> Controller
+* @APIgroup <%= schema.identifiers.singular.pascal %> Controller
 * @apidescription Gets related <%= rel.alias.label %>
 * @apiSuccess {json} The related <%= rel.schema.label %> model
 * @apiError (Error) 500 Internal server error
 */
 <%_ } else { _%>
-// GET /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier %> show<%= rel.alias.class_name %>
+// GET /api/<%= schema.identifiers.plural.snake %>/:id/<%= rel.alias.identifier %> show<%= rel.alias.class_name %>
 <%_ } _%>
 module.exports.show<%= rel.alias.class_name %> = async (req, res, next) => {
-  const <%= schema.identifier %> = await <%= schema.class_name %>.findById(req.params.id)
+  const <%= schema.identifier %> = await <%= schema.identifiers.singular.pascal %>.findById(req.params.id)
   // .catch( err => next(boom.badImplementation(err)));
 
-  const <%= rel.schema.identifier %> = await <%= rel.schema.class_name %>.findById(<%= schema.identifier %>.<%= rel.alias.identifier + '_id' %>)
+  const <%= rel.schema.identifier %> = await <%= rel.schema.identifiers.singular.pascal %>.findById(<%= schema.identifier %>.<%= rel.alias.identifier + '_id' %>)
   <%_ let relatedSchema = blueprint.schemas.find(s => s.id === rel.related_schema_id) _%>
   <%_ relatedSchema.relations.forEach((rel) => { _%>
   <%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
@@ -35,23 +35,23 @@ module.exports.show<%= rel.alias.class_name %> = async (req, res, next) => {
 <% } else if (rel.type === RelationType.HAS_MANY) { %>
 <%_ if (generate_api_doc) { _%>
 /**
-* @api {GET} /api/<%= schema.identifier_plural %>/:id/<%= rel.schema.identifier_plural %> show<%= rel.schema.class_name_plural %>
+* @api {GET} /api/<%= schema.identifiers.plural.snake %>/:id/<%= rel.schema.identifiers.plural.snake %> show<%= rel.schema.class_name_plural %>
 * @APIname show<%= rel.schema.class_name_plural %>
-* @APIgroup <%= schema.class_name %> Controller
+* @APIgroup <%= schema.identifiers.singular.pascal %> Controller
 * @apidescription Gets related <%= rel.schema.class_name_plural %>
 * @apiSuccess {json} The related <%= rel.schema.class_name_plural %>
 * @apiError (Error) 500 Internal server error
 */
 // TODO - this must be refactored to do: RelatedModel.find({ _id: [1,2,3] })
 <%_ } else { _%>
-// GET /api/<%= schema.identifier_plural %>/:id/<%= rel.schema.identifier_plural %> show<%= rel.schema.class_name_plural %>
+// GET /api/<%= schema.identifiers.plural.snake %>/:id/<%= rel.schema.identifiers.plural.snake %> show<%= rel.schema.class_name_plural %>
 <%_ } _%>
 module.exports.show<%= rel.alias.class_name_plural %> = async (req, res, next) => {
 
-  const model = await <%= schema.class_name %>.findById(req.params.id)
+  const model = await <%= schema.identifiers.singular.pascal %>.findById(req.params.id)
   // .catch( err => next(boom.badImplementation(err)));
 
-  const <%= rel.schema.identifier_plural %> = await <%= rel.schema.class_name %>
+  const <%= rel.schema.identifiers.plural.snake %> = await <%= rel.schema.identifiers.singular.pascal %>
   .find({ _id: model.<%= rel.alias.identifier %>_ids })
   <%_ let relatedSchema = blueprint.schemas.find(s => rel.related_schema_id) _%>
   <%_ relatedSchema.relations.forEach((rel) => { _%>
@@ -65,7 +65,7 @@ module.exports.show<%= rel.alias.class_name_plural %> = async (req, res, next) =
 
   return res
   .status(200)
-  .send(<%= rel.schema.identifier_plural %>)
+  .send(<%= rel.schema.identifiers.plural.snake %>)
   .end();
 
 };
@@ -73,18 +73,18 @@ module.exports.show<%= rel.alias.class_name_plural %> = async (req, res, next) =
 <%_ } else if (rel.type === 'REF_BELONGS_TO') { _%>
 <%_ if (generate_api_doc) { _%>
 /**
-* @api {GET} /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier_plural %> show<%= rel.alias.class_name_plural %>
+* @api {GET} /api/<%= schema.identifiers.plural.snake %>/:id/<%= rel.alias.identifier_plural %> show<%= rel.alias.class_name_plural %>
 * @APIname show<%= rel.alias.class_name_plural %>
-* @APIgroup <%= schema.class_name %> Controller
+* @APIgroup <%= schema.identifiers.singular.pascal %> Controller
 * @apidescription Gets related <%= rel.alias.class_name_plural %>
 * @apiSuccess {json} The related <%= rel.schema.class_name_plural %> models
 * @apiError (Error) 500 Internal server error
 */
 <%_ } else { _%>
-// GET /api/<%= schema.identifier_plural %>/:id/<%= rel.alias.identifier_plural %> show<%= rel.alias.class_name_plural %>
+// GET /api/<%= schema.identifiers.plural.snake %>/:id/<%= rel.alias.identifier_plural %> show<%= rel.alias.class_name_plural %>
 <%_ } _%>
 module.exports.show<%= rel.alias.class_name_plural %> = (req, res, next) => {
-    return <%= rel.schema.class_name %>
+    return <%= rel.schema.identifiers.singular.pascal %>
     .find({ <%= rel.reverse_alias.identifier %>_id: req.params.id })
     <%_ let relatedSchema = blueprint.schemas.find(s => s.id === rel.related_schema_id) _%>
     <%_ relatedSchema.relations.forEach((rel) => { _%>
@@ -92,10 +92,10 @@ module.exports.show<%= rel.alias.class_name_plural %> = (req, res, next) => {
     .populate({ path: '<%= rel.alias.identifier %>', select: '<%= rel.related_lead_attribute %>' })
     <%_ } _%>
     <%_ }) _%>
-    .then((<%= rel.schema.identifier_plural %>) => {
+    .then((<%= rel.schema.identifiers.plural.snake %>) => {
         return res
         .status(200)
-        .send(<%= rel.schema.identifier_plural %>)
+        .send(<%= rel.schema.identifiers.plural.snake %>)
         .end();
     })
     // .catch( err => next(boom.badImplementation(err)));

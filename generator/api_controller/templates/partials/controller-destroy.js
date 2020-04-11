@@ -1,17 +1,17 @@
 <%_ if (generate_api_doc) { _%>
 /**
-* @api {DELETE} /api/<%= schema.identifier_plural %>/:id Destroy
+* @api {DELETE} /api/<%= schema.identifiers.plural.snake %>/:id Destroy
 * @APIname Destroy
-* @APIgroup <%= schema.class_name %> Controller
-* @apidescription Destroy a single <%= schema.label %>
-* @apiSuccess {json} The destroyed <%= schema.label %>
+* @APIgroup <%= schema.identifiers.singular.pascal %> Controller
+* @apidescription Destroy a single <%= schema.identifiers.singular.label %>
+* @apiSuccess {json} The destroyed <%= schema.identifiers.singular.label %>
 * @apiError (Error) 500 Internal server error
 */
 <%_ } else { _%>
-// DELETE /api/<%= schema.identifier_plural %>/:id Destroy
+// DELETE /api/<%= schema.identifiers.plural.snake %>/:id Destroy
 <%_ } _%>
 module.exports.delete = (req, res, next) => {
-  return <%= schema.class_name %>.remove({ _id: req.params.id })
+  return <%= schema.identifiers.singular.pascal %>.remove({ _id: req.params.id })
   .then((response) => {
     return res
     .status(200)

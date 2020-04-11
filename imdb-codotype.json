@@ -1,22 +1,36 @@
 {
-  "label": "Imdb",
-  "identifier": "imdb",
+  "id": "123hf-4gf84-dfjk23-dfkj9",
   "generatorId": "codotype-nodejs-express-mongodb-generator",
   "generatorVersion": "0.1.0",
+  "identifiers": {
+    "label": "IMDB",
+    "snake": "imdb",
+    "camel": "Imdb",
+    "pascal": "Imdb",
+    "kebab": "imdb"
+  },
   "schemas": [
     {
       "id": "USER_SCHEMA_ID",
-      "order": 0,
-      "label": "User",
-      "label_plural": "Users",
-      "identifier": "user",
-      "identifier_plural": "users",
-      "class_name": "User",
-      "class_name_plural": "Users",
+      "identifiers": {
+        "singular": {
+          "label": "User",
+          "snake": "user",
+          "camel": "user",
+          "pascal": "User",
+          "kebab": "user"
+        },
+        "plural": {
+          "label": "Users",
+          "snake": "users",
+          "camel": "users",
+          "pascal": "Users",
+          "kebab": "users"
+        }
+      },
       "attributes": [
         {
           "id": "USER_EMAIL_ATTRIBUTE",
-          "order": 0,
           "label": "E-Mail",
           "identifier": "email",
           "help": "The E-Mail address associated with this User",
@@ -31,17 +45,25 @@
     },
     {
       "id": "0.8779873367144082",
-      "order": 0,
-      "label": "User Rating",
-      "label_plural": "User Ratings",
-      "identifier": "user_rating",
-      "identifier_plural": "user_ratings",
-      "class_name": "UserRating",
-      "class_name_plural": "UserRatings",
+      "identifiers": {
+        "singular": {
+          "label": "User Rating",
+          "snake": "user_rating",
+          "camel": "userRating",
+          "pascal": "UserRating",
+          "kebab": "user-rating"
+        },
+        "plural": {
+          "label": "User Ratings",
+          "snake": "user_ratings",
+          "camel": "userRatings",
+          "pascal": "UserRatings",
+          "kebab": "user-ratings"
+        }
+      },
       "relations": [
         {
           "id": "0.6472937831383605",
-          "order": 0,
           "type": "BELONGS_TO",
           "required": false,
           "related_schema_id": "USER_SCHEMA_ID",
@@ -54,7 +76,6 @@
         },
         {
           "id": "0.5870560868319303",
-          "order": 0,
           "type": "BELONGS_TO",
           "required": false,
           "related_schema_id": "0.41883558842481916",
@@ -69,7 +90,6 @@
       "attributes": [
         {
           "id": "0.6990315854865059",
-          "order": 0,
           "label": "Score",
           "identifier": "score",
           "help": "",
@@ -86,17 +106,25 @@
     },
     {
       "id": "0.41883558842481916",
-      "order": 0,
-      "label": "Movie",
-      "label_plural": "Movies",
-      "identifier": "movie",
-      "identifier_plural": "movies",
-      "class_name": "Movie",
-      "class_name_plural": "Movies",
+      "identifiers": {
+        "singular": {
+          "label": "Movie",
+          "snake": "movie",
+          "camel": "movie",
+          "pascal": "Movie",
+          "kebab": "movie"
+        },
+        "plural": {
+          "label": "Movies",
+          "snake": "movies",
+          "camel": "movies",
+          "pascal": "Movies",
+          "kebab": "movies"
+        }
+      },
       "relations": [
         {
           "id": "0.6659086106593484",
-          "order": 0,
           "type": "BELONGS_TO",
           "required": false,
           "related_schema_id": "0.013728952237533454",
@@ -111,7 +139,6 @@
       "attributes": [
         {
           "id": "0.3403836399912703",
-          "order": 0,
           "label": "Name",
           "identifier": "name",
           "help": "",

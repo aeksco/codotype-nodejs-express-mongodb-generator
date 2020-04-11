@@ -1,8 +1,22 @@
-module.exports = {
-  name: 'NodeExpressEnvironment',
-  async write () {
-    await this.renderComponent({ src: 'env-dev.txt', dest: '.env' })
-    await this.renderComponent({ src: 'env-test.txt', dest: '.env.test' })
-    await this.renderComponent({ src: 'env-docker.txt', dest: '.env.docker' })
-  }
-}
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const Generator = {
+    name: "NodeExpressEnvironment",
+    write() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.renderComponent({ src: "env-dev.txt", dest: ".env" });
+            yield this.renderComponent({ src: "env-test.txt", dest: ".env.test" });
+            yield this.renderComponent({ src: "env-docker.txt", dest: ".env.docker" });
+        });
+    },
+};
+module.exports = Generator;
+//# sourceMappingURL=index.js.map

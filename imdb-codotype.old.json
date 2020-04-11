@@ -1,0 +1,48 @@
+{
+  "id": "123hf-4gf84-dfjk23-dfkj9",
+  "generatorId": "codotype-nodejs-express-mongodb-generator",
+  "generatorVersion": "0.1.0",
+  "identifiers": {
+    "label": "IMDB",
+    "snake": "imdb",
+    "camel": "Imdb",
+    "pascal": "Imdb",
+    "kebab": "imdb"
+  },
+  "schemas": [
+    {
+      "id": "USER_SCHEMA_ID",
+      "identifiers": {
+        "singular": {
+          "label": "User",
+          "snake": "user",
+          "camel": "user",
+          "pascal": "User",
+          "kebab": "user"
+        },
+        "plural": {
+          "label": "Users",
+          "snake": "users",
+          "camel": "users",
+          "pascal": "Users",
+          "kebab": "users"
+        }
+      },
+      "attributes": [
+        {
+          "id": "USER_EMAIL_ATTRIBUTE",
+          "label": "E-Mail",
+          "identifier": "email",
+          "help": "The E-Mail address associated with this User",
+          "required": true,
+          "unique": true,
+          "datatype": "STRING",
+          "datatypeOptions": {},
+          "locked": true
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "configuration": {}
+}

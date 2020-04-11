@@ -127,8 +127,8 @@ exports.forgot_password = async (req, res) => {
 
   // Assembles email
   const dispatch = {
-    sender: '<%= blueprint.label %> <worker@<%= blueprint.identifier %>.com>',
-    subject: '<%= blueprint.label %> Password Reset',
+    sender: '<%= project.identifiers.label %> <worker@<%= project.identifiers.snake %>.com>',
+    subject: '<%= project.identifiers.label %> Password Reset',
     recipient: user.email,
     text: "Your password reset token is " + [process.env.APP_ADDRESS + '#/auth/reset_password?token=' + user.password_reset_token].join('')
   }

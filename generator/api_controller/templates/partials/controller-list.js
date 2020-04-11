@@ -1,14 +1,14 @@
 <%_ if (generate_api_doc) { _%>
 /**
-* @api {get} /api/<%= schema.identifier_plural %> Index
+* @api {get} /api/<%= schema.identifiers.plural.snake %> Index
 * @APIname Index
-* @APIgroup <%= schema.class_name %> Controller
-* @apidescription Gets list of current <%= schema.label_plural %>
-* @apiSuccess {json} Collection of <%= schema.label_plural %>
+* @APIgroup <%= schema.identifiers.singular.pascal %> Controller
+* @apidescription Gets list of current <%= schema.identifiers.plural.label %>
+* @apiSuccess {json} Collection of <%= schema.identifiers.plural.label %>
 * @apiError (Error) 500 Internal server error
 */
 <%_ } else { _%>
-// GET /api/<%= schema.identifier_plural %>/:id Index
+// GET /api/<%= schema.identifiers.plural.snake %>/:id Index
 <%_ } _%>
 module.exports.list = async (req, res, next) => {
   // Gets pagination variables for query
@@ -17,9 +17,9 @@ module.exports.list = async (req, res, next) => {
   // NOTE - the `countDocuments` operation is another call to MongoDB
   // This can be potentially expensive, you may want to remove it
   // It's currently included so pagination functions correctly on the front-end
-  const count = await <%= schema.class_name %>.countDocuments({})
+  const count = await <%= schema.identifiers.singular.pascal %>.countDocuments({})
 
-  <%= schema.class_name %>.find({})
+  <%= schema.identifiers.singular.pascal %>.find({})
   <%_ schema.relations.forEach((rel) => { _%>
   <%_ if ([RelationType.BELONGS_TO, RelationType.HAS_ONE].includes(rel.type)) { _%>
   .populate({ path: '<%= rel.alias.identifier %>', select: '<%= rel.related_lead_attribute %>' })
@@ -29,13 +29,13 @@ module.exports.list = async (req, res, next) => {
   .skip(offset)
   .lean()
   .exec()
-  .then((<%= schema.identifier_plural %>) => {
+  .then((<%= schema.identifiers.plural.snake %>) => {
     return res
     .status(200)
     .json({
       page: page,
       per_page: per_page,
-      items: <%= schema.identifier_plural %>,
+      items: <%= schema.identifiers.plural.snake %>,
       count: count
     });
   })

@@ -1,6 +1,6 @@
 const boom = require('boom')
 const { getPaginationParams } = require('../../lib/pagination')
-const <%= schema.class_name %> = require('./<%= schema.identifier %>.model')
+const <%= schema.identifiers.singular.pascal %> = require('./<%= schema.identifier %>.model')
 <%- include('./partials/controller-dependencies.js') -%>
 
 // // // //
